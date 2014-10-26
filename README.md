@@ -1,7 +1,7 @@
 Getting-and-Cleaning-Data-Course-Project
 ========================================
 
-This readme file explains how all of the scripts work in order to prepare tidy data from a raw data set of _Human Activity Recognition Using Smartphones_. The goal of this script is to create a data set that can be used for later analysis.  
+This readme file explains how the script works in order to prepare tidy data from a raw data set of _Human Activity Recognition Using Smartphones_.
 
 This script should be able to use the data from this [link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) and:
 1. Merge the training and the test sets to create one data set, extracting only the measurements on the mean and standard deviation for each measurement. 
@@ -13,14 +13,14 @@ This script should be able to use the data from this [link](https://d396qusza40o
   
 ### How this script works  
   
-The script starts creating a vector that will hold the _training_ and the _test_ sets. This is done in the `mergeDatasets` function at the beginning of the script.
+The first thing to do is to create a vector that will hold the _training_ and the _test_ sets. This is done in the `mergeDatasets` function at the beginning of the script:
 
 ```
    ## Merge the test and train data sets
    dt.signals <- mergeDatasets()
 ```
   
-The `mergeDatasets` function first initializes the vector to 561 NULL values (the number of variables in the original data sets) and then sets the cols that we will extract (this way we'll only extract the mean and standard deviation columns from the original data set as requested in the project).
+The `mergeDatasets` function first initializes the vector to 561 NULL values (the number of variables in the original measurements data sets) and then sets the cols that we will extract (this way we'll only extract the _mean_ and _standard deviation_ columns from the original data set as requested in the project).
 
 ```
       colsToExtract <- rep( "NULL", 561 )
@@ -66,11 +66,11 @@ The next step is to load and merge the _test_ and _training_ data sets.
 It exists three files for each data set:
 * `subject_<set>.txt`: stores the identifier of the subject who carried out the experiment
 * `y_<set>.txt`: stores the identifier of the activity
-* `X_<set>.txt`: stores the different measurements
+* `X_<set>.txt`: stores the measurements
 
 **Note:** The `<set>` identifier will be either _test_ or _train_ if we refer to the _test_ or _training_ data sets respectively.
 
-As the three files contains the correspondent measures line by line, we can use the `cbind` function to merge all the data sets in one single step.
+As all the measures match row by row in the three files, we can use the `cbind` function to merge the three data sets in one single step once we've read them.
 
 ```
       dt.testSubject <- data.table(
@@ -91,11 +91,13 @@ As the three files contains the correspondent measures line by line, we can use 
       dt.testMerged <- cbind( dt.testSubject, dt.testActivity, dt.testSignals )
 ```
 
-Note that when importing the `X_<set>.txt` we specify the `colClasses` parameter with the `colsToExtract` vector to only retrieve the necessary columns from the file. 
+Note that when importing the `X_<set>.txt` we specify the `colClasses` parameter with the `colsToExtract` vector to only retrieve the required columns from the file. 
 
-Once we've merged the _test_ data sets, will do the same with _training_ ones and the  `mergeDatasets` function will finally return the merge of _test_ and _training_ data sets.
+Once we've merged the _test_ data sets, will do the same with _training_ ones and the  `mergeDatasets` function will finally return the merge of _test_ and _training_ sets.
 
-Next step is to appropriately label the full data set with descriptive variable names (the first two: SubjectID and Activity have been set in the import process).
+*****
+
+Next step is to appropriately label the full data set with descriptive variable names (the first two: SubjectID and Activity have been already set in the import process).
 
 ```
    ## Change columns names   
@@ -105,6 +107,7 @@ Next step is to appropriately label the full data set with descriptive variable 
    setnames( dt.signals,  6, "tBodyAccStd-X" )
    setnames( dt.signals,  7, "tBodyAccStd-Y" )
    ...
+   setnames( dt.signals, 68, "fBodyGyroJerkMagStd" )
 ```
 
 Next step will be using descriptive activity names to name the activities in the data set. We do it with the following code:
@@ -118,7 +121,7 @@ Next step will be using descriptive activity names to name the activities in the
    dt.signals[Activity==6, Activity:="LAYING"]
 ```
 
-And finally with the beautified data set we create a second, independent tidy data set with the average of each variable for each activity and each subject and write it in the default directory.
+And finally with the beautified data set we create a second, independent tidy data set with the average of each variable for each activity and each subject that we write in the default directory.
 
 ```
    dt.tidy <- dt.signals[,lapply( .SD, mean ), by=c( "SubjectID", "Activity" )]
