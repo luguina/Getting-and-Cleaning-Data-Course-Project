@@ -1,8 +1,11 @@
-\`\`\` GETTING AND CLEANING DATA COURSERA COURSE DATA DICTIONARY -
+``` 
+
+GETTING AND CLEANING DATA COURSERA COURSE DATA DICTIONARY -
 COURSE PROJECT
 
-SubjectID 2 Identifier of the subject who carried out the experiment
-1..30 .Unique identifier assigned to subject
+SubjectID 		2 
+	Identifier of the subject who carried out the experiment
+					1..30 .Unique identifier assigned to subject
 
 Activity 18 Activity identification WALKING .Walking activity
 WALKING\_UPSTAIRS .Walking upstairs activity WALKING\_DOWNSTAIRS
@@ -269,4 +272,5 @@ from body gyroscope frequency calculated using the Euclidean norm and
 applying Fast Fourier Transform (15 implied decimal places)
 -0.9976..0.2878 .Numeric value
 
-\`\`
+```
+
