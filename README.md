@@ -3,11 +3,11 @@ Getting-and-Cleaning-Data-Course-Project
 
 This readme file explains how the script works in order to prepare tidy data from a raw data set of _Human Activity Recognition Using Smartphones_.
 
-This script should be able to use the data from this [link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) and:
-1. Merge the training and the test sets to create one data set, extracting only the measurements on the mean and standard deviation for each measurement. 
-2. Use descriptive activity names to name the activities in the data set
-3. Appropriately label the data set with descriptive variable names. 
-4. creates a second, independent tidy data from the result of 1+2+3 and set with the average of each variable for each activity and each subject.
+This script should be able to use the data from this [link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) and:  
+1. Merge the training and the test sets to create one data set, extracting only the measurements on the mean and standard deviation for each measurement.  
+2. Use descriptive activity names to name the activities in the data set  
+3. Appropriately label the data set with descriptive variable names  
+4. creates a second, independent tidy data from the result of 1+2+3 and set with the average of each variable for each activity and each subject  
   
 **Note:** This script can be run as long as the original data sets are in the R working directory. A full description is available at this [site](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
   
@@ -109,6 +109,8 @@ Next step is to appropriately label the full data set with descriptive variable 
    ...
    setnames( dt.signals, 68, "fBodyGyroJerkMagStd" )
 ```
+
+*****
 
 Next step will be using descriptive activity names to name the activities in the data set. We do it with the following code:
 
