@@ -1,7 +1,6 @@
 
 
-##                  GETTING AND CLEANING DATA COURSERA COURSE
-##                      DATA DICTIONARY - COURSE PROJECT
+## DATA DICTIONARY - COURSE PROJECT
 
 ```
 SubjectID               2
