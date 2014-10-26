@@ -1,6 +1,6 @@
 ## Coursera's Getting and Cleaning Data
 ## Course Project
-## Due date: Mon 3 Nov 1:30 am GMT+2
+## Due date: Mon 27 Nov 00:30 am GMT+1
 ##
 ## Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most 
 ## advanced algorithms to attract new users. The data linked to from the course 
@@ -180,12 +180,12 @@ run_analysis <- function() {
    setnames( dt.signals, 60, "fBodyGyroStd-Z" )
    setnames( dt.signals, 61, "fBodyAccMagMean" )
    setnames( dt.signals, 62, "fBodyAccMagStd" )
-   setnames( dt.signals, 63, "fBodyBodyAccJerkMagMean" )
-   setnames( dt.signals, 64, "fBodyBodyAccJerkMagStd" )
-   setnames( dt.signals, 65, "fBodyBodyGyroMagMean" )
-   setnames( dt.signals, 66, "fBodyBodyGyroMagStd" )
-   setnames( dt.signals, 67, "fBodyBodyGyroJerkMagMain" )
-   setnames( dt.signals, 68, "fBodyBodyGyroJerkMagStd" )
+   setnames( dt.signals, 63, "fBodyAccJerkMagMean" )
+   setnames( dt.signals, 64, "fBodyAccJerkMagStd" )
+   setnames( dt.signals, 65, "fBodyGyroMagMean" )
+   setnames( dt.signals, 66, "fBodyGyroMagStd" )
+   setnames( dt.signals, 67, "fBodyGyroJerkMagMean" )
+   setnames( dt.signals, 68, "fBodyGyroJerkMagStd" )
    
    dt.signals[Activity==1, Activity:="WALKING"]
    dt.signals[Activity==2, Activity:="WALKING_UPSTAIRS"]
