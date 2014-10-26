@@ -68,7 +68,7 @@ It exists three files for each data set:
 * `y_<set>.txt`: stores the identifier of the activity
 * `X_<set>.txt`: stores the measurements
 
-**Note:** The `<set>` identifier will be either _test_ or _train_ if we refer to the _test_ or _training_ data sets respectively.
+**Note:** The `<set>` identifier will be either `test` or `train` if we refer to the _test_ or _training_ data sets respectively.
 
 As all the measures match row by row in the three files, we can use the `cbind` function to merge the three data sets in one single step once we've read them.
 
@@ -91,7 +91,7 @@ As all the measures match row by row in the three files, we can use the `cbind` 
       dt.testMerged <- cbind( dt.testSubject, dt.testActivity, dt.testSignals )
 ```
 
-Note that when importing the `X_<set>.txt` we specify the `colClasses` parameter with the `colsToExtract` vector to only retrieve the required columns from the file. 
+Note that when importing the `X_<set>.txt` we specify the `colClasses` parameter along with the `colsToExtract` vector to only retrieve the required columns from the data set. 
 
 Once we've merged the _test_ data sets, will do the same with _training_ ones and the  `mergeDatasets` function will finally return the merge of _test_ and _training_ sets.
 
