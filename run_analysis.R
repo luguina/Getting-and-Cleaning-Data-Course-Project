@@ -116,7 +116,7 @@ run_analysis <- function() {
       return( rbind( dt.testMerged, dt.trainMerged ))
    }
    
-   ## 
+   ## Merge the test and train data sets
    dt.signals <- mergeDatasets()
 
    ## Change columns names   
