@@ -1,8 +1,8 @@
-
-
-## DATA DICTIONARY - COURSE PROJECT
+## Code Book
 
 ```
+DATA DICTIONARY - COURSE PROJECT
+
 SubjectID               2
    Identifier of the subject who carried out the experiment
                         1..30 .Unique identifier assigned to subject
