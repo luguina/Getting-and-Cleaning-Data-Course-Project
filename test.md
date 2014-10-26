@@ -2,7 +2,7 @@
 
 ## DATA DICTIONARY - COURSE PROJECT
 
-```
+
 |SubjectID               2
 |   Identifier of the subject who carried out the experiment
 |                        1..30 .Unique identifier assigned to subject
@@ -17,6 +17,6 @@
 |                        LAYING             .Laying activity
 |            
 |tBodyAccMean-X          17
-v   Mean value of X axis for body linear acceleration derived in time (15 implied 
+|   Mean value of X axis for body linear acceleration derived in time (15 implied 
 |   decimal places)
                   
