@@ -3,13 +3,18 @@ Getting-and-Cleaning-Data-Course-Project
 
 This readme file explains how all of the scripts work in order to prepare tidy data from a raw data set of _Human Activity Recognition Using Smartphones_. The goal of this script is to create a data set that can be used for later analysis.  
   
-*Note:* This script can be run as long as the original data sets are in the R working directory  
+**Note:** This script can be run as long as the original data sets are in the R working directory  
   
 ### How this script works  
   
-The first part of the script creates a vector that will hold the required variables as we will only extract the mean and standard deviation measurements.  
+The script starts creating a vector that will hold the required variables as we will only extract the mean and standard deviation measurements. This is done in the `mergeDatasets` function at the beginning of the script.
+
+```
+   ## Merge the test and train data sets
+   dt.signals <- mergeDatasets()
+```
   
-We first initialize the vector to 561 NULL values and then define the cols that we will stract (this way we'll only extract the defined columns in the original data set).  
+The `mergeDatasets` function first initialize the vector to 561 NULL values and then set the cols that we will stract (this way we'll only extract the mean and standard deviation columns from the original data set).
 
 ```
       colsToExtract <- rep( "NULL", 561 )
@@ -48,6 +53,70 @@ We first initialize the vector to 561 NULL values and then define the cols that 
                        542,      ## fBodyBodyGyroJerkMag-mean()
                        543       ## fBodyBodyGyroJerkMag-std()
                      )] <- "numeric"
+```
 
+The next step is to load and merge the _test_ and _train_ data sets. 
+
+It exists three files for each data set:
+* `subject_<set>.txt`: stores the identifier of the subject who carried out the experiment
+* `y_<set>.txt`: stores the identifier of the activity
+* `X_<set>.txt`: stores the different measurements
+
+**Note:** The `<set>` identifier will be either _test_ or _train_ if we refer to the _test_ or _train_ data sets respectively.
+
+As the three files contains the correspondent measures line by line, we can use the `cbind` function to merge all the data sets.
+
+```
+      dt.testSubject <- data.table(
+         read.table( "./UCI HAR Dataset/test/subject_test.txt",
+                     col.names="SubjectID" ))
+      
+      dt.testActivity <- data.table(
+         read.table( "./UCI HAR Dataset/test/y_test.txt",
+                     col.names="Activity", 
+                     colClasses="character" ))
+      
+      dt.testSignals <- data.table(
+         read.table( "./UCI HAR Dataset/test/X_test.txt",
+                     colClasses=colsToExtract,
+                     comment.char = "" ))
+
+      ## Merge all the test info in one single data table
+      dt.testMerged <- cbind( dt.testSubject, dt.testActivity, dt.testSignals )
+```
+
+Note that when importing the `X_<set>.txt` we specify the `colClasses` parameter with the `colsToExtract` vector to only retrieve the necessary columns from the file. 
+
+Once we've merged the _test_ data sets, will do the same with _train_ ones and the  `mergeDatasets` function will finally return the merge of _test_ and _train_ data sets.
+
+Next step is to appropriately label the full data set with descriptive variable names (the first two: SubjectID and Activity have been set in the import process).
+
+```
+   ## Change columns names   
+   setnames( dt.signals,  3, "tBodyAccMean-X" )
+   setnames( dt.signals,  4, "tBodyAccMean-Y" )
+   setnames( dt.signals,  5, "tBodyAccMean-Z" )
+   setnames( dt.signals,  6, "tBodyAccStd-X" )
+   setnames( dt.signals,  7, "tBodyAccStd-Y" )
+   ...
+```
+
+Next step will be using descriptive activity names to name the activities in the data set. We do it with the following code:
+
+```
+   dt.signals[Activity==1, Activity:="WALKING"]
+   dt.signals[Activity==2, Activity:="WALKING_UPSTAIRS"]
+   dt.signals[Activity==3, Activity:="WALKING_DOWNSTAIRS"]
+   dt.signals[Activity==4, Activity:="SITTING"]
+   dt.signals[Activity==5, Activity:="STANDING"]
+   dt.signals[Activity==6, Activity:="LAYING"]
+```
+
+And finally with the beautified data set we create a second, independent tidy data set with the average of each variable for each activity and each subject and write it in the default directory.
+
+```
+   dt.tidy <- dt.signals[,lapply( .SD, mean ), by=c( "SubjectID", "Activity" )]
+   
+   write.table( dt.tidy, "tidy_dataset.txt", row.names=FALSE )
 ```
 
