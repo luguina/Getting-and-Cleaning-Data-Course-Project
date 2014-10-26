@@ -3,17 +3,13 @@ Getting-and-Cleaning-Data-Course-Project
 
 This readme file explains how all of the scripts work in order to prepare tidy data from a raw data set of _Human Activity Recognition Using Smartphones_. The goal of this script is to create a data set that can be used for later analysis.  
 
-One of the most exciting areas in all of data science right now is wearable computing - see for example this article . Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained: 
-
-http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
-
-The goal of this script is to:
+This script should be able to use the data from this [link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) and:
 1. Merge the training and the test sets to create one data set, extracting only the measurements on the mean and standard deviation for each measurement. 
 2. Use descriptive activity names to name the activities in the data set
 3. Appropriately label the data set with descriptive variable names. 
 4. creates a second, independent tidy data from the result of 1+2+3 and set with the average of each variable for each activity and each subject.
   
-**Note:** This script can be run as long as the original data sets are in the R working directory  
+**Note:** This script can be run as long as the original data sets are in the R working directory. A full description is available at this [site](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
   
 ### How this script works  
   
